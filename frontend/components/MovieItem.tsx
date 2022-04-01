@@ -1,19 +1,26 @@
-import React from "react";
+import * as React from 'react';
+import { useState, useEffect } from 'react';
 import Image from "next/image";
 
-type ShowItemProps = {
+type MovieItemProps = {
 	title: string;
 	year: string;
 	poster: string;
 	type?: string;
 };
 
-const ShowItem = ({ title, year, poster, type }: ShowItemProps) => {
+const MovieItem = ({ title, year, poster, type }: MovieItemProps) => {
+	const [ posterPic, setPosterPic ] = useState<string>();
+
+	useEffect(() => {
+		// Get poster
+	}, []);
+	
 	return (
-		<div className="show-item">
+		<div className="movie-item">
 			{ type && <div className="result-item-type">{ type }</div> }
-			
-			<div className="show-item-poster-container">
+
+			<div className="movie-item-poster-container">
                 <Image
                     src={ poster }
                     alt="Picture of the author"
@@ -25,11 +32,11 @@ const ShowItem = ({ title, year, poster, type }: ShowItemProps) => {
 			</div>
 
 			<div className="result-item-textuals">
-				<div className="show-item-title">{title}</div>
-				<div className="show-item-year">{year}</div>
+				<div className="movie-item-title">{title}</div>
+				<div className="movie-item-year">{year}</div>
 			</div>
 		</div>
 	);
 };
 
-export default ShowItem;
+export default MovieItem;

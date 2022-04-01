@@ -13,8 +13,8 @@ let options = {
 	},
 	options: {  // pass options to plugins
         images: {
-			fanartApiKey: 'eee124a844b2e6598d36ce9ade9c483f',
-			tmdbApiKey: '952740bdbda47b59fafde61765f7c199',
+			fanartApiKey: process.env.FANART_KEY,
+			tmdbApiKey: process.env.TMDB_KEY,
 			tvdbApiKey: process.env.TVDB_API_KEY,
             smallerImages: true,
         }

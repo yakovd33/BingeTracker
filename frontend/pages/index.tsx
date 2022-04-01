@@ -1,9 +1,12 @@
 import React from 'react';
+import AuthHelper from '../helpers/AuthHelper';
+import LoggedHome from './home/LoggedHome';
 import NotLoggedHome from './home/NotLoggedHome';
 
 const index = () => {
   return <div>
-      <NotLoggedHome/>
+      { !AuthHelper.isLogged() && <NotLoggedHome/> }
+      { AuthHelper.isLogged() && <LoggedHome/> }
   </div>;
 };
 

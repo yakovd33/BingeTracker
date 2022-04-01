@@ -4,7 +4,7 @@ import AuthHelper from './AuthHelper';
 const API_URL = 'http://localhost:5000/';
 
 export default class ApiHelper {
-    static get (url : string, callback : any){
+    static get (url : string, callback : Function){
         let headers : any = {};
 
         if (AuthHelper.isLogged()) {
@@ -18,7 +18,7 @@ export default class ApiHelper {
     }
 
     
-    static async getResult (url : string, callback : any){
+    static async getResult (url : string, callback : Function){
         let headers : any = {};
 
         if (AuthHelper.isLogged()) {
@@ -32,7 +32,7 @@ export default class ApiHelper {
     }
     
     
-    static post (url : string, params = {}, callback : any) {
+    static post (url : string, params = {}, callback : Function) {
         let headers : any = {};
 
         if (AuthHelper.isLogged()) {
@@ -45,7 +45,7 @@ export default class ApiHelper {
         }).catch((error) => {  })
     }
 
-    static delete (url : string, callback : any) {
+    static delete (url : string, callback : Function) {
         let headers : any = {};
 
         if (AuthHelper.isLogged()) {

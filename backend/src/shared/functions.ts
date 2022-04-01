@@ -1,5 +1,7 @@
 import logger from './Logger';
 import axios from 'axios';
+import DB from '../db';
+import bcrypt from 'bcrypt';
 
 export const pErr = (err: Error) => {
     if (err) {
@@ -16,4 +18,62 @@ export const getShowPosterFromTvdb = async (id: number) : Promise<string> => {
     let images = await axios.get(url);
 
     return `https://thetvdb.com/banners/${ images.data.data[0].fileName }`;
+}
+
+export const getPosterFromTmdb = async (imdbId: number, type : string) : Promise<string> => {
+    let apiKey = process.env.TMDB_KEY;
+    let url = `https://api.themoviedb.org/3/find/${ imdbId }?api_key=${ apiKey }&language=en-US&external_source=imdb_id`;
+    let images = await axios.get(url);
+
+    console.log(images);
+
+    if (type == 'show') {
+        return `https://www.themoviedb.org/t/p/w220_and_h330_face/${ images.data.tv_results[0].poster_path  }`;
+    } else if (type == 'movie') {
+        return `https://www.themoviedb.org/t/p/w220_and_h330_face/${ images.data.movie_results[0].poster_path  }`;
+    }
+
+    return '';
+}
+
+export const getFanartPics = async (tvdbId: number) : Promise<any> => {
+    let apiKey = process.env.FANART_KEY;
+    let url = `https://webservice.fanart.tv/v3/tv/${ tvdbId }?api_key=${ apiKey }`;
+    let images = await axios.get(url);
+
+    return images.data;
+}
+
+export const isEmailValid = (email : string) => {
+    return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email);
+}
+
+export const doesEmailExist = async (email : string) => {
+    try {
+        let emailQuery = await DB.query(`SELECT * FROM users WHERE email = '${ email }'`);
+        return emailQuery.rows.length > 0;
+    } catch (e) {
+        console.log(e);
+    }
+
+    return false;
+}
+
+export const getUserRowByEmail = async (email : string) => {
+    try {
+        let query = await DB.query(`SELECT * FROM users WHERE email = '${ email }'`);
+        
+        if (query.rows.length) {
+            return query.rows[0];
+        }
+    } catch (e) {
+        console.log(e);
+    }
+
+    return false;
+}
+
+export const checkPassHash = async (pass : string, hash : string) => {
+    let compare = await bcrypt.compare(pass, hash);    
+    return compare;
 }

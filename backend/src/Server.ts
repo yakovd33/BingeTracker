@@ -1,4 +1,5 @@
 import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import path from 'path';
 import helmet from 'helmet';
@@ -30,6 +31,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 // Show routes called in console during development
 if (process.env.NODE_ENV === 'development') {
