@@ -1,6 +1,5 @@
 import { getPosterFromTmdb } from '@shared/functions';
 import { Request, Response } from 'express';
-import { TypedRequestBody } from 'src/@types/express/TypedRequestBody';
 import trakt from '../trakt';
 
 interface MovieInterface {

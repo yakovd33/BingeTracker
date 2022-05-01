@@ -17,7 +17,7 @@ const SearchResult = ({ result }: Props) => {
 						<ShowItem
 							title={result.show.title}
 							year={result.show.year}
-							poster="https://place-hold.it/300x500"
+							poster={result.poster}
                             type={ result.type }
 						/>
 					</a>
@@ -30,7 +30,7 @@ const SearchResult = ({ result }: Props) => {
 						<MovieItem
 							title={result.movie.title}
 							year={result.movie.year}
-							poster="https://place-hold.it/300x500"
+							poster={result.poster}
                             type={ result.type }
 						/>
 					</a>

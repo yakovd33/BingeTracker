@@ -1,9 +1,11 @@
 import { Router } from 'express';
 import { getAllUsers, login, register, traktRedirect } from '../controllers/Users';
+import { verifyToken } from '../middleware/Auth';
 import trakt from '../trakt';
-import { getPopularShows, getShowById } from '../controllers/Shows';
+import { getEpisodeByNumber, getPopularShows, getShowById } from '../controllers/Shows';
 import { getPopularMovies } from '../controllers/Movies';
 import { getSearchResults } from '../controllers/Search';
+import { historyWatch } from '../controllers/History';
 
 // User Route
 const userRouter = Router();
@@ -21,6 +23,7 @@ userRouter.get('/trakt_redirect', traktRedirect)
 const showsRouter = Router();
 showsRouter.get('/showcase/:page', getPopularShows);
 showsRouter.get('/:id', getShowById);
+showsRouter.get('/:id/:season/:episode', getEpisodeByNumber);
 
 // Movies Route
 const moviesRouter = Router();
@@ -31,10 +34,15 @@ moviesRouter.get('/showcase/:page', getPopularMovies);
 const searchRouter = Router();
 searchRouter.get('/:keywords', getSearchResults);
 
+// History Route
+const historyRouter = Router();
+historyRouter.post('/watch/:imdbId', verifyToken, historyWatch);
+
 // Export the base-router
 const baseRouter = Router();
 baseRouter.use('/users', userRouter);
 baseRouter.use('/shows', showsRouter);
 baseRouter.use('/movies', moviesRouter);
 baseRouter.use('/search', searchRouter);
+baseRouter.use('/history', historyRouter);
 export default baseRouter;

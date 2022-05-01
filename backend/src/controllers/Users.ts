@@ -1,10 +1,10 @@
 import { doesEmailExist, isEmailValid, getUserRowByEmail, checkPassHash } from '@shared/functions';
 import { Request, Response } from 'express';
-import { TypedRequestBody } from '../@types/express/TypedRequestBody';
 import DB from '../db';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import trakt from '../trakt';
+import { CustomRequest } from 'src/@types/express/CustomRequest';
 
 const saltRounds = 10;
 // const TOKEN_KEY = process.env.TOKEN_KEY;
@@ -14,7 +14,7 @@ export async function getAllUsers(req: Request, res: Response) {
     return res.status(200).json();
 }
 
-export async function register (req: TypedRequestBody<{ email: string, password: string, rePass: string }>, res: Response) {
+export async function register (req: CustomRequest<{ email: string, password: string, rePass: string }>, res: Response) {
     const email = req.body.email;
     const password = req.body.password;
     const rePass = req.body.rePass;
@@ -51,7 +51,7 @@ export async function register (req: TypedRequestBody<{ email: string, password:
     res.status(200).json(response);
 }
 
-export async function login (req: TypedRequestBody<{ email: string, password: string }>, res: Response) {
+export async function login (req: CustomRequest<{ email: string, password: string }>, res: Response) {
     const email = req.body.email;
     const password = req.body.password;
 
@@ -81,8 +81,9 @@ export async function login (req: TypedRequestBody<{ email: string, password: st
 
                 delete userRow.pass_hashed;
 
+                userRow.token = token;
                 response['user'] = userRow;
-                response['token'] = token;
+                // response['user']['token'] = token;
                 response['success'] = true;
             } else {
                 response['error'] = 'Password is incorrect.';

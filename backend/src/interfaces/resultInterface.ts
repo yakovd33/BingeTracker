@@ -22,6 +22,5 @@ export interface resultInterface {
             tvdb: number;
             tvrage: number;
         }
-    };
-    poster: string;
+    }
 }

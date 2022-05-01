@@ -1,15 +1,7 @@
-import { getShowPosterFromTvdb, getPosterFromTmdb, getFanartPics } from '@shared/functions';
+import { getPosterFromTmdb, getFanartPics } from '@shared/functions';
 import { Request, Response } from 'express';
-import { TypedRequestBody } from 'src/@types/express/TypedRequestBody';
 import trakt from '../trakt';
-
-interface ShowInterface {
-    title: string;
-    year: string;
-    poster: string;
-    traktId: number;
-    imdbId: number;
-}
+import { ShowInterface } from '../interfaces/showInterface'
 
 export async function getPopularShows(req: Request, res: Response) {
 
@@ -37,7 +29,7 @@ export async function getPopularShows(req: Request, res: Response) {
 }
 
 export async function getShowById (req: Request, res: Response) {
-    let showId = req.params.id;    
+    let showId = req.params.id;
 
     let show = await trakt.search.id({
         id_type: 'trakt',
@@ -46,8 +38,23 @@ export async function getShowById (req: Request, res: Response) {
         extended: 'full'
     });
 
-    // show.data[0].show['poster'] = await getShowPosterFromTmdb(show.data[0].show.ids.imdb);
+    // Get seasons
+    show.data[0].seasons = await trakt.seasons.summary({ id: showId, extended: 'episodes' });
+
     show.data[0].show['images'] = await getFanartPics(show.data[0].show.ids.tvdb);
 
     res.status(200).json(show)
+}
+
+export async function getEpisodeByNumber (req: Request, res: Response) {
+    const { season, episode, id } = req.params;    
+
+    let episodeRes = await trakt.episodes.summary({
+        id,
+        season,
+        episode,
+        extended: 'full'
+    });
+
+    res.status(200).json(episodeRes)
 }

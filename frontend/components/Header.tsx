@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { AiOutlineSearch } from 'react-icons/ai';
 import AuthHelper from "../helpers/AuthHelper";
 
+// TODO: Add dark mode toggler
 const Header = () => {
 	const [ toggleSearch, setToggleSearch ] = useState<boolean>(false);
 	const [ keywords, setKeywords ] = useState<string>();

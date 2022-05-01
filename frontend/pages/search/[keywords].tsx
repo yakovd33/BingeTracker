@@ -15,14 +15,13 @@ const Keywords = () => {
     useEffect(() => {
         if (keywords != undefined) {
             ApiHelper.get(`search/${ keywords }`, (res : any) => {
-                setResults(res.data)
-                console.log(res);
+                setResults(res)
             });
         }
     }, [ keywords ]);
 
 	return <div>
-		{ keywords }
+		<h2 id="search-res-msg">Showing search results for: '{ keywords }'</h2>
 
         <div id="results-list">
             { results && results.map((res) => (

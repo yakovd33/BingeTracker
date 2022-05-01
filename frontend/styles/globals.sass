@@ -17,6 +17,7 @@ body
 .container
     max-width: 1220px
     margin: auto
+    position: relative
 
 .cute-btn
     background-color: $red
@@ -142,17 +143,30 @@ nav#main-nav
     border-radius: $border-radius
     color: #121212
 
-    .result-item-type
+    .result-item-floating
         position: absolute
-        background: $yellow
         top: 10px
         left: 10px
         z-index: 999
-        color: #121212
-        padding: 5px 10px
-        font-weight: bold
-        font-size: 0.8rem
-        border-radius: $border-radius
+        display: flex
+        text-transform: uppercase
+        align-items: center
+
+        .result-item-type, .show-item-year
+            background: $yellow
+            color: #121212
+            padding: 5px 10px
+            font-weight: bold
+            font-size: 0.8rem
+            border-radius: $border-radius
+            line-height: 15px
+            margin: 0
+            box-shadow: 0 0 15px #15151580
+        
+        .show-item-year
+            background-color: rgba(0, 0, 0, 0.6)
+            color: #fff
+            margin-left: 5px
 
     .result-item-textuals
         position: absolute
@@ -417,19 +431,155 @@ label
         &:hover
             text-decoration: underline
 
+// Search page
+#search-res-msg
+    padding: 0 30px
+    margin-bottom: 10px
+    color: #fff
+
 // Show page
-#show-single-hero
+#show-single-hero, #season-single-hero, #episode-single-hero
     margin-top: -30px
     position: relative
+    max-height: 400px
+    background-attachment: fixed
+    background-size: cover
+    box-shadow: inset 0 0 30px #000000bd
 
     img
         object-fit: cover
-        max-height: 350px
+        max-height: 400px
         width: 100%
+        object-position: top
+        visibility: hidden
 
-    #show-single-hero-textuals
-        position: absolute
-        bottom: 10px
-        font-size: 1.4rem
-        font-weight: bold
+#show-single-hero-textuals
+    position: absolute
+    top: -65px
+    font-size: 1.4rem
+    font-weight: bold
+    color: #fff
+    left: 350px
+    text-shadow: 0 0 10px #202020
+
+    #show-single-hero-title
+        font-size: 2rem
+
+#floating-show-sidebar
+    position: absolute
+    width: 300px
+    left: 0
+    top: -100px
+
+    #show-poster
+        img
+            width: 100%
+            height: 427px
+            box-shadow: 0 0 30px #131313
+            object-fit: fill
+            max-height: 427px
+            visibility: visible
+            border-radius: 4px
+
+#show-content-wrap
+    padding-left: 350px
+    padding-top: 20px
+    color: #fff
+
+    .show-content-title
+        font-size: 0.9rem
+        margin-bottom: 5px
+
+    #show-details
+        margin-top: 20px
+
+    #seasons-title
+        margin-top: 40px
+
+    #seasons-wrap
+        display: flex
+        flex-wrap: wrap
+        margin-top: 10px
+
+        .season-item
+            margin-right: 10px
+            width: calc(25% - 10px)
+            margin-bottom: 10px
+            cursor: pointer
+
+            a
+                color: #fff
+
+            .season-image
+                img
+                    visibility: visible
+                    width: 100%
+                    border-radius: 4px
+                    box-shadow: 0 0 20px #2c2c2c42
+
+            .season-name
+                text-align: center
+
+            .season-episode-count
+                text-align: center
+                margin-top: -4px
+    
+    .episode-link
         color: #fff
+
+    .episode-item
+        display: flex
+        margin-bottom: 10px
+        align-items: center
+        
+        .episode-item-img
+            img
+                visibility: visible
+                height: 200px
+                border-radius: 4px
+                box-shadow: 0 0 20px #2c2c2c42
+
+        .episode-item-name
+            font-size: 1.3rem
+
+            strong
+                color: $red
+                
+
+        .episode-item-right
+            margin-left: 20px
+            max-width: 60%
+
+            .episode-item-air-date
+                color: #666
+                font-size: 0.9rem
+                line-height: 14px
+                margin-bottom: 3px
+
+#episodes-navigation-title
+    margin-bottom: 10px
+
+#episode-navigation
+    display: flex
+    flex-wrap: wrap
+    margin-bottom: 20px
+
+    .episode-navigation-item
+        padding: 5px 14px
+        color: #fff
+        background-color: rgba(255, 255, 255, 0.3)
+        border-radius: 50px
+        margin-right: 5px
+
+        &.active
+            background-color: rgba(255, 255, 255, 0.7)
+
+#episode-btns
+    margin-bottom: 15px
+
+    #add-watch-btn
+        padding: 10px
+        background-color: $red
+        display: inline-block
+        cursor: pointer
+        border-radius: $border-radius

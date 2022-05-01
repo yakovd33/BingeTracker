@@ -18,8 +18,11 @@ const MovieItem = ({ title, year, poster, type }: MovieItemProps) => {
 	
 	return (
 		<div className="movie-item">
-			{ type && <div className="result-item-type">{ type }</div> }
-
+			<div className="result-item-floating">
+				{ type && <div className="result-item-type">{ type }</div> }
+				{ year && <div className="show-item-year">{year}</div> }
+			</div>
+			
 			<div className="movie-item-poster-container">
                 <Image
                     src={ poster }
@@ -33,7 +36,6 @@ const MovieItem = ({ title, year, poster, type }: MovieItemProps) => {
 
 			<div className="result-item-textuals">
 				<div className="movie-item-title">{title}</div>
-				<div className="movie-item-year">{year}</div>
 			</div>
 		</div>
 	);

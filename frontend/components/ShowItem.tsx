@@ -11,7 +11,10 @@ type ShowItemProps = {
 const ShowItem = ({ title, year, poster, type }: ShowItemProps) => {
 	return (
 		<div className="show-item">
-			{ type && <div className="result-item-type">{ type }</div> }
+			<div className="result-item-floating">
+				{ type && <div className="result-item-type">{ type }</div> }
+				{ year && <div className="show-item-year">{year}</div> }
+			</div>
 			
 			<div className="show-item-poster-container">
                 <Image
@@ -26,7 +29,6 @@ const ShowItem = ({ title, year, poster, type }: ShowItemProps) => {
 
 			<div className="result-item-textuals">
 				<div className="show-item-title">{title}</div>
-				<div className="show-item-year">{year}</div>
 			</div>
 		</div>
 	);
