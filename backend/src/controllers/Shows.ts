@@ -1,7 +1,9 @@
 import { getPosterFromTmdb, getFanartPics } from '@shared/functions';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import trakt from '../trakt';
 import { ShowInterface } from '../interfaces/showInterface'
+import { checkConnected } from 'src/middleware/Auth';
+import DB from '../db';
 
 export async function getPopularShows(req: Request, res: Response) {
 
@@ -47,14 +49,28 @@ export async function getShowById (req: Request, res: Response) {
 }
 
 export async function getEpisodeByNumber (req: Request, res: Response) {
-    const { season, episode, id } = req.params;    
+    const { season, episode, id } = req.params;
+    const { logged } = req.query;
 
     let episodeRes = await trakt.episodes.summary({
         id,
         season,
         episode,
         extended: 'full'
-    });
+    });    
+
+    // Get user history of this episode
+    
+    const user = checkConnected(req, res);    
+    if (user) {
+        const userId = user.user_id;
+        
+        console.log(episodeRes.data.ids.imdb);
+        
+        let query = await DB.query("SELECT * FROM watches WHERE user_id = $1 AND imdb_id = $2", [ userId, episodeRes.data.ids.imdb ]);
+        
+        episodeRes.data.watches = query.rowCount;
+    }    
 
     res.status(200).json(episodeRes)
 }

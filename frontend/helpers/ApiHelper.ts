@@ -9,7 +9,7 @@ export default class ApiHelper {
 
         if (AuthHelper.isLogged()) {
             headers.token = AuthHelper.getAccessToken();
-            headers.uid = AuthHelper.getUserId();
+            headers.uid = AuthHelper.getUserId();            
         }
 
         axios.get(API_URL + url, { headers: headers }).then((response) => {

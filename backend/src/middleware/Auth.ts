@@ -7,10 +7,7 @@ const config = process.env;
 export const verifyToken = (req : TypedRequestQueryHeadersParams<any, any, any, any>, res : Response, next : NextFunction) => {
 	const token = req.body.token || req.query.token || req.headers.token;
 
-	if (!token) return res.status(403).send("A token is required for authentication");
-
-	console.log(token);
-	
+	if (!token) return res.status(403).send("A token is required for authentication");	
 
 	try {
 		const decoded = jwt.verify(token, config.TOKEN_KEY);
@@ -20,6 +17,19 @@ export const verifyToken = (req : TypedRequestQueryHeadersParams<any, any, any, 
 	}
 	return next();
 };
+
+export const checkConnected = (req : TypedRequestQueryHeadersParams<any, any, any, any>, res : Response) => {
+	const token = req.body.token || req.query.token || req.headers.token;
+
+	if (!token) return false;
+
+	try {
+		const decoded = jwt.verify(token, config.TOKEN_KEY);
+		return decoded;
+	} catch (err) {		
+		return false;
+	}
+}
 
 export const verifyAdmin = (req : TypedRequestQueryHeadersParams<any, any, any, any>, res : Response, next : NextFunction) => {
 	verifyToken(req, res, () => {

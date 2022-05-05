@@ -577,9 +577,25 @@ label
 #episode-btns
     margin-bottom: 15px
 
-    #add-watch-btn
-        padding: 10px
-        background-color: $red
-        display: inline-block
-        cursor: pointer
-        border-radius: $border-radius
+    #watch-btn-wrap
+        user-select: none
+        #add-watch-btn
+            padding: 10px
+            background-color: $red
+            display: inline-block
+            cursor: pointer
+            border-radius: $border-radius
+
+            &.disabled
+                opacity: 0.6
+                cursor: not-allowed
+
+        #add-watch-text
+            margin-left: 15px
+
+            &.alone
+                margin-left: 0
+
+            a
+                color: #fff
+                text-decoration: underline
