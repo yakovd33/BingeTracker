@@ -32,7 +32,7 @@ const Header = () => {
 						<Link href="/movies"><a className="nav-link">Movies</a></Link>
 						<Link href=""><a className="nav-link">Discover</a></Link>
 
-						{ AuthHelper.isLogged() && <Link href=""><a className="nav-link">Your History</a></Link> }
+						{ AuthHelper.isLogged() && <Link href="/history"><a className="nav-link">Your History</a></Link> }
 						{ AuthHelper.isLogged() && <Link href=""><a className="nav-link">Your Progress</a></Link> }
 					</div>
 				</div>

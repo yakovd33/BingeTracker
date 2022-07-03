@@ -1,19 +1,12 @@
+import { IdsInterface } from "../global/interfaces";
+
 export interface SeasonInterface {
 	number: number;
-	ids: {
-		trakt: number;
-		tvdb: number;
-		tmdb: number;
-		tvrage: number;
-	}, episodes: [{
+	ids: IdsInterface,
+	episodes: [{
 		season: number;
 		number: number;
 		title: number;
-		ids: {
-			trakt: number;
-			tvdb: number;
-			tmdb: number;
-			tvrage: number;
-		};
+		ids: IdsInterface;
 	}]
 }

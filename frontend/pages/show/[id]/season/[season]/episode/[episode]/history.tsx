@@ -32,7 +32,7 @@ const EpisodeHistory = ({ show, setShow, seasons, setSeasons }: any) => {
 
     const handleWatch = () => {
         if (!watched) {
-            ApiHelper.post(`history/watch/${ episodeInfo.ids.imdb }`, {}, (res : any) => {
+            ApiHelper.post(`history/watch/${ episodeInfo.ids.imdb }/show`, { showTraktId: id }, (res : any) => {
                 setWatches(watches + 1);
                 setWatched(true);
             });

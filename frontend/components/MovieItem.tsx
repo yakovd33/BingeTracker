@@ -4,7 +4,7 @@ import Image from "next/image";
 
 type MovieItemProps = {
 	title: string;
-	year: string;
+	year?: string;
 	poster: string;
 	type?: string;
 };

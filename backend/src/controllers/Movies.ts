@@ -1,14 +1,8 @@
 import { getPosterFromTmdb } from '@shared/functions';
 import { Request, Response } from 'express';
+import { MovieInterface } from 'src/interfaces/movieInterface';
 import trakt from '../trakt';
 
-interface MovieInterface {
-    title: string;
-    year: string;
-    poster: string;
-    traktId: number;
-    imdbId: number;
-}
 
 export async function getPopularMovies(req: Request, res: Response) {
 

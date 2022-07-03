@@ -3,7 +3,7 @@ import Image from "next/image";
 
 type ShowItemProps = {
 	title: string;
-	year: string;
+	year?: string;
 	poster: string;
 	type?: string;
 };

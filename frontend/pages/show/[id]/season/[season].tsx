@@ -11,6 +11,9 @@ const Season = ({ show, setShow, seasons, setSeasons }: any) => {
 	const router = useRouter();
 	const { id, season } = router.query;
 
+	console.log(seasons);
+	
+
 	// Get show
 	useEffect(() => {
 		if (id) {
@@ -64,7 +67,7 @@ const Season = ({ show, setShow, seasons, setSeasons }: any) => {
 							<h4 id="seasons-title">Episodes:</h4>
 
 							<div id="seasons-wrap">
-								{seasons[parseInt(season.toString())].episodes.map((episodeItem: any) => (
+								{ seasons && seasons[parseInt(season.toString())].episodes.map((episodeItem: any) => (
 									<EpisoodeItem showId={ id } episodeItem={episodeItem} />
 								))}
 							</div>

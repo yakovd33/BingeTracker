@@ -11,7 +11,7 @@ interface Props {
 const SearchResult = ({ result }: Props) => {
 	return (
 		<div>
-			{result && result.show && (
+			{result && result.show && result.show.ids && (
 				<Link href={`/show/${result.show.ids.trakt}`}>
 					<a href={`/show/${result.show.ids.trakt}`}>
 						<ShowItem
@@ -24,7 +24,7 @@ const SearchResult = ({ result }: Props) => {
 				</Link>
 			)}
 
-            {result && result.movie && (
+            {result && result.movie && result.movie.ids && (
 				<Link href={`/movie/${result.movie.ids.trakt}`}>
 					<a href={`/movie/${result.movie.ids.trakt}`}>
 						<MovieItem

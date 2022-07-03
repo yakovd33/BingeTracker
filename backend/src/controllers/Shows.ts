@@ -1,9 +1,10 @@
-import { getPosterFromTmdb, getFanartPics } from '@shared/functions';
-import { NextFunction, Request, Response } from 'express';
+import { getPosterFromTmdb } from '@shared/functions';
+import {  Request, Response } from 'express';
 import trakt from '../trakt';
 import { ShowInterface } from '../interfaces/showInterface'
 import { checkConnected } from 'src/middleware/Auth';
 import DB from '../db';
+import { getShowByImdbId } from 'src/utils/shows';
 
 export async function getPopularShows(req: Request, res: Response) {
 
@@ -32,19 +33,7 @@ export async function getPopularShows(req: Request, res: Response) {
 
 export async function getShowById (req: Request, res: Response) {
     let showId = req.params.id;
-
-    let show = await trakt.search.id({
-        id_type: 'trakt',
-        id: showId,
-        type: 'show',
-        extended: 'full'
-    });
-
-    // Get seasons
-    show.data[0].seasons = await trakt.seasons.summary({ id: showId, extended: 'episodes' });
-
-    show.data[0].show['images'] = await getFanartPics(show.data[0].show.ids.tvdb);
-
+    let show = await getShowByImdbId(showId, true, true);
     res.status(200).json(show)
 }
 
