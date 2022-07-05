@@ -53,9 +53,7 @@ export async function getEpisodeByNumber (req: Request, res: Response) {
     const user = checkConnected(req, res);    
     if (user) {
         const userId = user.user_id;
-        
-        console.log(episodeRes.data.ids.imdb);
-        
+                
         let query = await DB.query("SELECT * FROM watches WHERE user_id = $1 AND imdb_id = $2", [ userId, episodeRes.data.ids.imdb ]);
         
         episodeRes.data.watches = query.rowCount;

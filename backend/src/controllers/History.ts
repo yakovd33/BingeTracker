@@ -37,7 +37,7 @@ export async function getMyHistory(req: TypedRequestQueryHeadersParams<any, any,
     const HISTORY_LIMIT = `LIMIT ${HISTORY_ITEMS_PER_PAGE} OFFSET ${(page) * HISTORY_ITEMS_PER_PAGE}`;
     const DATE_FORMAT = `TO_CHAR(date, 'YYYY-MM-DD')`;
 
-    let historyDaysQuery = await DB.query(`SELECT DISTINCT ${DATE_FORMAT} AS date FROM watches ${HISTORY_WHERE} AND date IS NOT NULL GROUP BY date ${HISTORY_LIMIT}`)    
+    let historyDaysQuery = await DB.query(`SELECT DISTINCT ${DATE_FORMAT} AS date, COUNT(*) AS watches FROM watches ${HISTORY_WHERE} AND date IS NOT NULL GROUP BY date ORDER BY date DESC ${HISTORY_LIMIT}`)        
 
     for (let i = 0; i < historyDaysQuery.rows.length; i++) {
         let historyDay = historyDaysQuery.rows[i];

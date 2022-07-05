@@ -29,9 +29,7 @@ export const getPosterFromTmdb = async (imdbId: number, type : string) : Promise
         return `https://www.themoviedb.org/t/p/w220_and_h330_face/${ images.data.tv_results[0].poster_path  }`;
     } else if (type == 'movie') {
         return `https://www.themoviedb.org/t/p/w220_and_h330_face/${ images.data.movie_results[0].poster_path  }`;
-    } else if (type == 'episode') {
-        console.log(images.data.tv_episode_results);
-        
+    } else if (type == 'episode') {        
         return `https://www.themoviedb.org/t/p/w220_and_h330_face/${images.data.tv_episode_results[0].still_path}`
     }
 

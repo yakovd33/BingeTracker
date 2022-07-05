@@ -196,7 +196,7 @@ const Shows = () => {
 	}, [ page ]);
 
 	return (
-		<div>
+		<div className="container">
 			<div id="shows-list">
 				{ showsList && showsList.map((show) => (
 					<Link href={ `/show/${ show.traktId }` }>

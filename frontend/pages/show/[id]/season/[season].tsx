@@ -9,10 +9,7 @@ import EpisoodeItem from "../../../../components/EpisoodeItem";
 
 const Season = ({ show, setShow, seasons, setSeasons }: any) => {
 	const router = useRouter();
-	const { id, season } = router.query;
-
-	console.log(seasons);
-	
+	const { id, season } = router.query;	
 
 	// Get show
 	useEffect(() => {

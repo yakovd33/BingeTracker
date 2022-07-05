@@ -28,6 +28,8 @@ const Episode = ({ show, setShow, seasons, setSeasons }: any) => {
                 setWatches(episode.data.watches);
             });
         }
+
+        setWatched(false);
     }, [id, season, episode]);
 
     const handleWatch = () => {
@@ -42,7 +44,6 @@ const Episode = ({ show, setShow, seasons, setSeasons }: any) => {
     const handleUnWatch = () => {
         ApiHelper.post(`history/unwatch/${ episodeInfo.ids.imdb }`, {}, (res : any) => {
             if (watches) setWatches(watches - 1);
-            console.log(res);
         });
     }
 

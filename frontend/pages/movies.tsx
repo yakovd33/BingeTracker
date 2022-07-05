@@ -196,7 +196,7 @@ const Movies = () => {
 	}, [ page ]);
 
 	return (
-		<div>
+		<div className="container">
 			<div id="shows-list">
 				{ moviesList && moviesList.map((movie) => (
 					<Link href={ `/movie/${ movie.traktId }` }>

@@ -8,15 +8,13 @@ const History = () => {
 
 	useEffect(() => {
 		ApiHelper.get('history/me', (history: watchInterfacDay[]) => {			
-			setWatches(history);
-			console.log(history);
-			
+			setWatches(history);			
 		})
 	}, [])
 
 	return (
 		<div className="container">
-			<h1>Your watch history:</h1>
+			<h1 id="your-history-title">Your watch history:</h1>
 
 			{ watches && watches.map((day: watchInterfacDay) => (
 				<div className="history-day">

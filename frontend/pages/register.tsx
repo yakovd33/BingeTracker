@@ -13,7 +13,6 @@ const Register = () => {
         e.preventDefault();
 
         ApiHelper.post('users/register/', { email, password, rePass }, (res : any) => {
-            console.log(res); 
         });
     }
 

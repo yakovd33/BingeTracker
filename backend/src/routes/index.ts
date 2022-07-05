@@ -14,7 +14,6 @@ userRouter.post('/login', login);
 userRouter.post('/register', register);
 userRouter.get('/get_trakt_auth_url', (req, res, next) => {
     const traktAuthUrl = trakt.get_url();
-    console.log(traktAuthUrl);
     res.status(200).json({ url: traktAuthUrl })
 });
 userRouter.get('/trakt_redirect', traktRedirect)

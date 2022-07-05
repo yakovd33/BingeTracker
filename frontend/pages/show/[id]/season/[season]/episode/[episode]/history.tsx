@@ -42,7 +42,6 @@ const EpisodeHistory = ({ show, setShow, seasons, setSeasons }: any) => {
     const handleUnWatch = () => {
         ApiHelper.post(`history/unwatch/${ episodeInfo.ids.imdb }`, {}, (res : any) => {
             if (watches) setWatches(watches - 1);
-            console.log(res);
         });
     }
 

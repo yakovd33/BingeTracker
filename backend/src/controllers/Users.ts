@@ -100,10 +100,7 @@ export async function traktRedirect (req: Request, res: Response) {
     trakt.exchange_code(req.query.code, req.query.state).then((result : any) => {
         // contains tokens & session information
         // API can now be used with authorized requests
-        console.log(result);
         const token = trakt.export_token();
-        console.log(token);
-        
     });
     
     res.send('');
