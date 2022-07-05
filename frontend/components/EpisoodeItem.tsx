@@ -4,9 +4,11 @@ import { useTmdb } from '../utils/useTmdb';
 
 const EpisoodeItem = ({ episodeItem, showId }: any) => {
     const [ poster, additionalData ] = useTmdb(episodeItem.ids.imdb, 'episode');
-    
+    const episodeLink = `/show/${ showId }/season/${ episodeItem.season }/episode/${ episodeItem.number }/`;
+
     return (
-        <Link href={ `/show/${ showId }/season/${ episodeItem.season }/episode/${ episodeItem.number }/` }>
+        <Link href={{ pathname: episodeLink, query: { poster: poster, title: episodeItem.title, overview: additionalData?.overview }}}
+          as={episodeLink}>
             <a className="episode-link" href={ `/show/${ showId }/season/${ episodeItem.season }/episode/${ episodeItem.number }/` }>
                 <div className="episode-item">
                     <div className="episode-item-left">

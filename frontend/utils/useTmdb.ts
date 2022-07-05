@@ -18,9 +18,11 @@ export function useTmdb(imdbId: number, type: string) {
                 } else if (type == 'movie') {
                     setResult(`https://www.themoviedb.org/t/p/w220_and_h330_face/${images?.data.movie_results[0]?.poster_path}`);
                 } else if (type == 'episode') {
-                    setResult(`https://www.themoviedb.org/t/p/w454_and_h254_bestv2/${images?.data?.tv_episode_results[0]?.still_path}`);
-                    setAdditionalData(images.data.tv_episode_results[0]);                    
-                    
+                    setResult(`https://image.tmdb.org/t/p/w500/${images?.data?.tv_episode_results[0]?.still_path}`);
+
+                    if (images?.data?.tv_episode_results[0]) {
+                        setAdditionalData(images.data.tv_episode_results[0]);                    
+                    }
                 }
             }
         }

@@ -1,15 +1,16 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import Link from 'next/link';
+import { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
-import { ShowInterface } from '../../../../interfaces/showInterface';
-import { SeasonInterface } from '../../../../interfaces/seasonInterface';
 import ApiHelper from "../../../../helpers/ApiHelper";
-import { useTmdb } from '../../../../utils/useTmdb';
 import EpisoodeItem from "../../../../components/EpisoodeItem";
+import { GrFormNextLink, GrFormPreviousLink } from 'react-icons/gr'
 
 const Season = ({ show, setShow, seasons, setSeasons }: any) => {
 	const router = useRouter();
-	const { id, season } = router.query;	
+	const { id, season } = router.query;
+	const [ isThereSpecials, setIsThereSpecials ] = useState(false);
+	const [ firstSeasonNumber, setFirstSeasonNumber ] = useState(1);
 
 	// Get show
 	useEffect(() => {
@@ -22,6 +23,15 @@ const Season = ({ show, setShow, seasons, setSeasons }: any) => {
 			});
 		}
 	}, [id]);
+
+	useEffect(() => {
+		if (seasons && seasons.length) {
+            if (seasons[0].number == 0) {
+                setIsThereSpecials(true);
+				setFirstSeasonNumber(0)
+            }
+        }
+	}, [ seasons, id, season ])
 
 	const getSeasonBanner = (seasonNumber: number) => {
 		let bannerUrl = '';
@@ -67,6 +77,21 @@ const Season = ({ show, setShow, seasons, setSeasons }: any) => {
 								{ seasons && seasons[parseInt(season.toString())].episodes.map((episodeItem: any) => (
 									<EpisoodeItem showId={ id } episodeItem={episodeItem} />
 								))}
+							</div>
+							
+							
+							<div id="season-nagigation-arrows">
+								{ seasons && (parseInt(season as string) - 1) > firstSeasonNumber && <Link href={`/show/${id}/season/${parseInt(season as string) - 1}`}>
+									<a href={`/show/${id}/season/${parseInt(season as string) +1 }`} className="season-navigation-btn prev"><GrFormPreviousLink/> Previous Season</a>
+								</Link>}
+
+								{ seasons && (parseInt(season as string) - 1) == firstSeasonNumber && <Link href={`/show/${id}/season/0`}>
+									<a href={`/show/${id}/season/0`} className="season-navigation-btn">Series Specials</a>
+								</Link>}
+
+								{ seasons && (parseInt(season as string) + 1) < seasons.length && <Link href={`/show/${id}/season/${parseInt(season as string) + 1}`}>
+									<a href={`/show/${id}/season/${parseInt(season as string) + 1}`} className="season-navigation-btn next">Next Season <GrFormNextLink/></a>
+								</Link>}
 							</div>
 						</div>
 					</div>

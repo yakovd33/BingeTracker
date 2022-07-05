@@ -4,12 +4,14 @@ import ApiHelper from '../../../../../../../helpers/ApiHelper';
 import Link from 'next/link';
 import EpisodeHero from '../EpisodeHero';
 
-const Episode = ({ show, setShow, seasons, setSeasons }: any) => {
+const Episode = ({ show, setShow, seasons, setSeasons, poster, title, overview }: any) => {
     const router = useRouter();
     const { id, season, episode } = router.query;
     const [episodeInfo, setEpisodeInfo] = useState<any>(null);
     const [ watches, setWatches ] = useState(0);
     const [ watched, setWatched ] = useState(false);
+    const [ isThereSpecials, setIsThereSpecials ] = useState(false);
+    const [ seasonIndex, setSeasonIndex ] = useState(0);
 
     // Get show
     useEffect(() => {
@@ -22,15 +24,32 @@ const Episode = ({ show, setShow, seasons, setSeasons }: any) => {
             });
         }
 
-        if (season && episode) {
-            ApiHelper.get(`shows/${id}/${season}/${episode}`, (episode: any) => {                
-                setEpisodeInfo(episode.data);
-                setWatches(episode.data.watches);
-            });
+        if (season && typeof(season) == 'string') {
+            setSeasonIndex(parseInt(season) - 1);
+
+            if (episode) {
+                ApiHelper.get(`shows/${id}/${season}/${episode}`, (episode: any) => {                
+                    setEpisodeInfo(episode.data);
+                    setWatches(episode.data.watches);
+                });
+            }
         }
 
         setWatched(false);
     }, [id, season, episode]);
+
+    useEffect(() => {
+        if (seasons && seasons.length) {
+            if (seasons[0].number == 0) {
+                setIsThereSpecials(true)
+            }
+        }
+
+
+        if (isThereSpecials && typeof(season) == 'string') {
+            setSeasonIndex(parseInt(season))
+        }
+    }, [ seasons, isThereSpecials ])
 
     const handleWatch = () => {
         if (!watched) {
@@ -52,11 +71,11 @@ const Episode = ({ show, setShow, seasons, setSeasons }: any) => {
             <>
                 {episodeInfo &&
                     <>
-                        <EpisodeHero episodeInfo={episodeInfo} />
+                        <EpisodeHero episodeInfo={episodeInfo} poster={poster} />
 
                         <div className="container">
                             <div id="show-single-hero-textuals">
-                                <div id="show-single-hero-title">{season && season}x{episode && episode} {episodeInfo && episodeInfo.title}</div>
+                                <div id="show-single-hero-title">{season && season}x{episode && episode} { `${title ? title : episodeInfo && episodeInfo.title}` }</div>
                             </div>
 
                             <div id="floating-show-sidebar">
@@ -76,14 +95,14 @@ const Episode = ({ show, setShow, seasons, setSeasons }: any) => {
 
                                 <h4 id="episodes-navigation-title">Episodes:</h4>
                                 <div id="episode-navigation">
-                                    {[...Array(seasons[parseInt(String(season)) - 1].episodes.length)].map((_, index) => (
+                                    {[...Array(seasons[seasonIndex].episodes.length)].map((_, index) => (
                                         <Link href={`/show/${id}/season/${season}/episode/${index + 1}/`} scroll={false}><a href={`/show/${id}/season/${season}/episode/${index + 1}/`}><span className={`episode-navigation-item ${(index + 1 == parseInt(String(episode))) ? 'active' : ''}`}>{index + 1}</span></a></Link>
                                     ))}
                                 </div>
 
                                 <h6 className="show-content-title">Overview:</h6>
                                 <p>
-                                    {episodeInfo.overview}
+                                    { `${overview ? overview : episodeInfo && episodeInfo.overview}` }
                                 </p>
                             </div>
                         </div>
@@ -92,6 +111,10 @@ const Episode = ({ show, setShow, seasons, setSeasons }: any) => {
             </>
         }
     </div>;
+}
+
+Episode.getInitialProps = ({ query: { poster, title, overview } }: any) => {    
+    return { poster, title, overview }
 }
 
 export default Episode;

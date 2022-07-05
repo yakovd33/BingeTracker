@@ -56,10 +56,10 @@ const Show = ({ show, setShow, seasons, setSeasons } : any) => {
 								</p>
 
 								<div id="show-details">
-									<h4>YEAR: { show.year }</h4>
-									<h4>STATUS: { show.status }</h4>
-									<h4>NETWORK: { show.network }</h4>
-									<h4>EPISODES: { show.aired_episodes }</h4>
+									{ show.year && <h4>YEAR: { show.year }</h4> }
+									{ show.status && <h4>STATUS: { show.status }</h4> }
+									{ show.network && <h4>NETWORK: { show.network }</h4> }
+									{ show.aired_episodes && <h4>EPISODES: { show.aired_episodes }</h4> }
 								</div>
 
 								<h4 id="seasons-title">Seasons:</h4>

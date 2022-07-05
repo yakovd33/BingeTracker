@@ -27,6 +27,11 @@ body
     font-size: 0.8rem
     cursor: pointer
     border-radius: 40px
+    transition: $transition
+
+    &:hover
+        background-color: #fff
+        color: $red    
 
 .message
     position: relative
@@ -567,6 +572,34 @@ label
                 font-size: 0.9rem
                 line-height: 14px
                 margin-bottom: 3px
+
+#season-nagigation-arrows
+    display: flex
+    justify-content: center
+    padding-bottom: 20px
+
+    .season-navigation-btn
+        @extend .cute-btn
+        display: flex
+        align-items: center
+        margin-left: 10px
+        width: auto
+
+        svg
+            transition: $transition
+
+        &.prev svg
+            margin-right: 5px
+
+        &.next svg
+            margin-left: 5px
+
+        &:hover
+            &.prev svg
+                transform: translateX(-5px)
+
+            &.next svg
+                transform: translateX(5px)
 
 #episodes-navigation-title
     margin-bottom: 10px

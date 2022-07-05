@@ -28,7 +28,7 @@ const EpisodeHistory = ({ show, setShow, seasons, setSeasons }: any) => {
                 setWatches(episode.data.watches);
             });
         }
-    }, [id, season, episode]);
+    }, [id, season, episode, seasons]);
 
     const handleWatch = () => {
         if (!watched) {
