@@ -8,7 +8,6 @@ export interface watchInterface {
     type: string;
     show_trakt_id?: string;
     episode?: EpisodeInterface;
-    poster: string;
 }
 
 export interface watchInterfacDay {

@@ -17,8 +17,8 @@ const SearchResult = ({ result }: Props) => {
 						<ShowItem
 							title={result.show.title}
 							year={result.show.year}
-							poster={result.poster}
                             type={ result.type }
+							imdbId={ result.show.ids.imdb }
 						/>
 					</a>
 				</Link>
@@ -30,8 +30,8 @@ const SearchResult = ({ result }: Props) => {
 						<MovieItem
 							title={result.movie.title}
 							year={result.movie.year}
-							poster={result.poster}
                             type={ result.type }
+							imdbId={ result.movie.ids.imdb }
 						/>
 					</a>
 				</Link>

@@ -3,9 +3,15 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { AiOutlineSearch } from 'react-icons/ai';
 import AuthHelper from "../helpers/AuthHelper";
+import { DarkModeSwitch } from 'react-toggle-dark-mode';
+
+interface Props {
+	isLightMode: boolean;
+	toggleLightMode: (checked: boolean) => void;
+}
 
 // TODO: Add dark mode toggler
-const Header = () => {
+const Header = ({ isLightMode, toggleLightMode }: Props) => {
 	const [ toggleSearch, setToggleSearch ] = useState<boolean>(false);
 	const [ keywords, setKeywords ] = useState<string>();
 
@@ -56,6 +62,15 @@ const Header = () => {
 										</a>
 									</Link>
 								}
+
+								<div id="dark-mode-toggler">
+									<DarkModeSwitch
+										style={{ marginBottom: '0' }}
+										checked={isLightMode}
+										onChange={toggleLightMode}
+										size={30}
+									/>
+								</div>
 							</div>
 							
 							<form id="header-search-btn" onSubmit={ (e) => handleSearch(e) }>

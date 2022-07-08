@@ -6,6 +6,7 @@ const EpisodeHero = ({ episodeInfo, poster }: any) => {
         [poster] = useTmdb(episodeInfo?.ids?.imdb, 'episode');
     }
     
+    // TODO: Add next/prev episode arrows
     return (
         <div id="season-single-hero" style={{ backgroundImage: `url('${poster && poster}')` }}>
             <img src={`${poster}`} alt="" />

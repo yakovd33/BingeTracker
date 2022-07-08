@@ -4,6 +4,10 @@ import ApiHelper from '../../../../../../../helpers/ApiHelper';
 import Link from 'next/link';
 import EpisodeHero from '../EpisodeHero';
 
+// TODO: Comment
+// TODO: Show actors
+// TODO: Rate
+// TODO: Add to list
 const Episode = ({ show, setShow, seasons, setSeasons, poster, title, overview }: any) => {
     const router = useRouter();
     const { id, season, episode } = router.query;

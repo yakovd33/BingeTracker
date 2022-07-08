@@ -1,20 +1,21 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import Image from "next/image";
+import { useTmdb } from '../utils/useTmdb';
 
 type MovieItemProps = {
 	title: string;
 	year?: string;
-	poster: string;
 	type?: string;
+	imdbId: string;
+	poster?: string;
 };
 
-const MovieItem = ({ title, year, poster, type }: MovieItemProps) => {
-	const [ posterPic, setPosterPic ] = useState<string>();
-
-	useEffect(() => {
-		// Get poster
-	}, []);
+const MovieItem = ({ title, year, type, imdbId, poster }: MovieItemProps) => {
+	let banner = poster;
+	if (!banner) {
+		[banner] = useTmdb(imdbId, 'movie', 'placeholder-vertical');
+	}
 	
 	return (
 		<div className="movie-item">
@@ -25,7 +26,7 @@ const MovieItem = ({ title, year, poster, type }: MovieItemProps) => {
 			
 			<div className="movie-item-poster-container">
                 <Image
-                    src={ poster }
+                    src={ banner || '/placeholder.png'  }
                     alt="Picture of the author"
                     height={ 400 }
                     width={ 400 }

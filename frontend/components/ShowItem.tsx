@@ -1,14 +1,21 @@
 import React from "react";
 import Image from "next/image";
+import { useTmdb } from "../utils/useTmdb";
 
 type ShowItemProps = {
 	title: string;
 	year?: string;
-	poster: string;
 	type?: string;
+	imdbId: string;
+	poster?: string;
 };
 
-const ShowItem = ({ title, year, poster, type }: ShowItemProps) => {
+const ShowItem = ({ title, year, type, imdbId, poster }: ShowItemProps) => {	
+	let banner = poster;
+	if (!banner) {
+		[banner] = useTmdb(imdbId, 'show', 'placeholder-vertical');
+	}
+
 	return (
 		<div className="show-item">
 			<div className="result-item-floating">
@@ -18,7 +25,7 @@ const ShowItem = ({ title, year, poster, type }: ShowItemProps) => {
 			
 			<div className="show-item-poster-container">
                 <Image
-                    src={ poster }
+                    src={ banner || '/placeholder-vertical.png' }
                     alt="Picture of the author"
                     height={ 400 }
                     width={ 400 }

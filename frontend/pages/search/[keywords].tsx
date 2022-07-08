@@ -20,7 +20,7 @@ const Keywords = () => {
         }
     }, [ keywords ]);
 
-	return <div>
+	return <div className="container">
 		<h2 id="search-res-msg">Showing search results for: '{ keywords }'</h2>
 
         <div id="results-list">

@@ -13,9 +13,11 @@
     "next": "12.0.8",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-helmet": "^6.1.0",
     "react-icons": "^4.3.1",
     "react-redux": "^8.0.2",
     "react-responsive-image": "^5.0.0",
+    "react-toggle-dark-mode": "^1.1.0",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
     "sass": "^1.49.0"
@@ -23,6 +25,7 @@
   "devDependencies": {
     "@types/node": "17.0.10",
     "@types/react": "17.0.38",
+    "@types/react-helmet": "^6.1.5",
     "@types/react-redux": "^7.1.24",
     "@types/redux": "^3.6.0",
     "@types/redux-thunk": "^2.1.0",

@@ -1,34 +1,45 @@
 import React from "react";
 import axios from 'axios';
 
-export function useTmdb(imdbId: number, type: string) {
+export function useTmdb(imdbId: string, type: string, defaultPicture = 'placeholder') {
     const [result, setResult] = React.useState('');
     const [additionalData, setAdditionalData] = <any>React.useState(null);
-    const [loading, setLoading] = React.useState("false");    
+    const [loading, setLoading] = React.useState("false");   
     
     React.useEffect(() => {        
-        async function getTmdb(imdbId: number, type: string) {            
-            if (imdbId) {
-                let apiKey = process.env.TMDB_KEY;
-                let url = `https://api.themoviedb.org/3/find/${imdbId}?api_key=${apiKey}&language=en-US&external_source=imdb_id`;
-                let images = await axios.get(url);
+        async function getTmdb(imdbId: string, type: string) {            
+            let apiKey = process.env.TMDB_KEY;
+            let url = `https://api.themoviedb.org/3/find/${imdbId}?api_key=${apiKey}&language=en-US&external_source=imdb_id`;
+            
+            let images = await axios.get(url);            
 
-                if (type == 'show') {
-                    setResult(`https://www.themoviedb.org/t/p/w220_and_h330_face/${images?.data.tv_results[0]?.poster_path}`);
-                } else if (type == 'movie') {
-                    setResult(`https://www.themoviedb.org/t/p/w220_and_h330_face/${images?.data.movie_results[0]?.poster_path}`);
-                } else if (type == 'episode') {
-                    setResult(`https://image.tmdb.org/t/p/w500/${images?.data?.tv_episode_results[0]?.still_path}`);
+            let finalPath = '';
 
-                    if (images?.data?.tv_episode_results[0]) {
-                        setAdditionalData(images.data.tv_episode_results[0]);                    
-                    }
+            if (type == 'show') {
+                finalPath = images?.data.tv_results[0]?.poster_path
+                setResult(`https://www.themoviedb.org/t/p/w220_and_h330_face/${finalPath}`);
+            } else if (type == 'movie') {
+                finalPath = images?.data.movie_results[0]?.poster_path
+                setResult(`https://www.themoviedb.org/t/p/w220_and_h330_face/${finalPath}`);
+            } else if (type == 'episode') {
+                finalPath = images?.data?.tv_episode_results[0]?.still_path
+                setResult(`https://image.tmdb.org/t/p/w500/${finalPath}`);
+
+                if (images?.data?.tv_episode_results[0]) {
+                    setAdditionalData(images.data.tv_episode_results[0]);                    
                 }
+            }
+                                  
+            if (!finalPath || finalPath == '') {
+                setResult(`/${defaultPicture}.png`)
             }
         }
 
         getTmdb(imdbId, type);
     }, [ imdbId, type ]);
+
+    console.log(result);
+    
 
     return [result, additionalData];
 }

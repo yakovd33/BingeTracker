@@ -11,6 +11,7 @@ export const getFanartPics = async (tvdbId: number) : Promise<any> => {
 export const getPosterFromTmdb = async (imdbId: number, type : string) : Promise<string> => {
     let apiKey = process.env.TMDB_KEY;
     let url = `https://api.themoviedb.org/3/find/${ imdbId }?api_key=${ apiKey }&language=en-US&external_source=imdb_id`;
+    
     let images = await axios.get(url);
 
     if (type == 'show') {

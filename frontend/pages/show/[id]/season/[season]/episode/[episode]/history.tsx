@@ -70,6 +70,8 @@ const EpisodeHistory = ({ show, setShow, seasons, setSeasons }: any) => {
                                     </div>
                                 </div>
 
+                                {/* TODO: Add history */}
+
                                 <h4 id="episodes-navigation-title">Episodes:</h4>
                                 <div id="episode-navigation">
                                     {[...Array(seasons[parseInt(String(season)) - 1].episodes.length)].map((_, index) => (
