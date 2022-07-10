@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React from 'react'
 import { useTmdb } from '../utils/useTmdb';
 
+// TODO: Check icon to watched episodes(hover: watch counter)
 const EpisoodeItem = ({ episodeItem, showId }: any) => {
     const [ poster, additionalData ] = useTmdb(episodeItem.ids.imdb, 'episode');
     const episodeLink = `/show/${ showId }/season/${ episodeItem.season }/episode/${ episodeItem.number }/`;

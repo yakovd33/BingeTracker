@@ -1,5 +1,5 @@
 import trakt from '../trakt';
-import { getPosterFromTmdb, getFanartPics } from '@shared/functions';
+import { getFanartPics } from '@shared/functions';
 
 export async function getShowByImdbId(showId: string, withSeasons = false, withImages = false) {
     let show = await trakt.search.id({

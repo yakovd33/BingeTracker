@@ -1,4 +1,3 @@
-import { getPosterFromTmdb } from '@shared/functions';
 import {  Request, Response } from 'express';
 import trakt from '../trakt';
 import { ShowInterface } from '../interfaces/showInterface'
@@ -10,7 +9,7 @@ export async function getPopularShows(req: Request, res: Response) {
 
     let shows = await trakt.shows.recommended({
         pagination: true,
-        limit: 24,
+        limit: 25,
         page: req.params.page
     });    
 
@@ -22,7 +21,6 @@ export async function getPopularShows(req: Request, res: Response) {
         finalShows.push({
             title: show.title,
             year: show.year,
-            poster: (await getPosterFromTmdb(show.ids.imdb, 'show')).toString(),
             traktId: show.ids.trakt,
             imdbId: show.ids.imdb,
         });
