@@ -66,7 +66,7 @@ const EpisodeHistory = ({ show, setShow, seasons, setSeasons }: any) => {
                             <div id="show-content-wrap">
                                 <div id="episode-btns">
                                     <div id="watch-btn-wrap">
-                                        <span id="add-watch-text" className="alone">You watched this episode <Link href={ `/show/${id}/season/${season}/episode/${episode}/history` }><a href={ `history/` }>{ watches } times</a></Link></span>
+                                        <span id="add-watch-text" className="alone">You watched this episode <Link href={ `/show/${id}/season/${season}/episode/${episode}/history` }><a href={ `history/` }>{ watches } { `${watches != 1 ? 'times' : ' time'}` }</a></Link></span>
                                     </div>
                                 </div>
 

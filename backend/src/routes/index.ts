@@ -5,7 +5,7 @@ import trakt from '../trakt';
 import { getEpisodeByNumber, getPopularShows, getShowById } from '../controllers/Shows';
 import { getPopularMovies } from '../controllers/Movies';
 import { getSearchResults } from '../controllers/Search';
-import { historyWatch, historyUnWatch, getMyHistory } from '../controllers/History';
+import { historyWatch, historyUnWatch, getMyHistory, getWatchCount } from '../controllers/History';
 
 // User Route
 const userRouter = Router();
@@ -38,6 +38,7 @@ const historyRouter = Router();
 historyRouter.post('/watch/:imdbId/:type', verifyToken, historyWatch);
 historyRouter.post('/unwatch/:imdbId', verifyToken, historyUnWatch);
 historyRouter.get('/me', verifyToken, getMyHistory);
+historyRouter.get('/get_watch_count/:imdb_id', verifyToken, getWatchCount);
 
 // Export the base-router
 const baseRouter = Router();

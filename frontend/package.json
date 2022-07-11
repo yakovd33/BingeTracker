@@ -18,6 +18,7 @@
     "react-redux": "^8.0.2",
     "react-responsive-image": "^5.0.0",
     "react-toggle-dark-mode": "^1.1.0",
+    "react-tooltip": "^4.2.21",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
     "sass": "^1.49.0"

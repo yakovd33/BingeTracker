@@ -93,7 +93,7 @@ const Episode = ({ show, setShow, seasons, setSeasons, poster, title, overview }
                                     <div id="watch-btn-wrap">
                                        <div id="add-watch-btn" onClick={ handleWatch } className={ `${ watched ? 'disabled' : '' }` }>Add to history</div> 
 
-                                        <span id="add-watch-text">You watched this episode <Link href={ `/show/${id}/season/${season}/episode/${episode}/history` }><a href={ `history/` }>{ watches } times</a></Link></span>
+                                        <span id="add-watch-text">You watched this episode <Link href={ `/show/${id}/season/${season}/episode/${episode}/history` }><a href={ `history/` }>{ watches } { `${watches != 1 ? 'times' : ' time'}` }</a></Link></span>
                                     </div>
                                 </div>
 

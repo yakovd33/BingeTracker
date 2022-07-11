@@ -65,3 +65,13 @@ export async function getMyHistory(req: TypedRequestQueryHeadersParams<any, any,
     }
     res.json(days);
 }
+
+export async function getWatchCount(req: Request, res: Response) {
+    let { imdb_id } = req.params;
+
+    let watchItem = await DB.query(`SELECT * FROM watches WHERE imdb_id = '${imdb_id}'`);
+
+    res.json({
+        count: watchItem.rows.length
+    });
+}
