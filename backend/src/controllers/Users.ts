@@ -7,17 +7,14 @@ import trakt from '../trakt';
 import { CustomRequest } from 'src/@types/express/CustomRequest';
 
 const saltRounds = 10;
-// const TOKEN_KEY = process.env.TOKEN_KEY;
-const TOKEN_KEY = 'sdfJ23145!%ADF!14';
+const { TOKEN_KEY } = process.env;
 
 export async function getAllUsers(req: Request, res: Response) {
     return res.status(200).json();
 }
 
 export async function register (req: CustomRequest<{ email: string, password: string, rePass: string }>, res: Response) {
-    const email = req.body.email;
-    const password = req.body.password;
-    const rePass = req.body.rePass;
+    const { email, password, rePass } = req.body;
 
     let response = {
         error: '',
@@ -40,7 +37,7 @@ export async function register (req: CustomRequest<{ email: string, password: st
                 });
             } else {
                 // Passwords do not match
-                response['error'] = 'Password do not match.';
+                response['error'] = 'Password do not match.';                
             }
         } else {
             // Email exists
@@ -52,8 +49,7 @@ export async function register (req: CustomRequest<{ email: string, password: st
 }
 
 export async function login (req: CustomRequest<{ email: string, password: string }>, res: Response) {
-    const email = req.body.email;
-    const password = req.body.password;
+    const { email, password } = req.body;
 
     let response = {
         error: '',
@@ -75,7 +71,7 @@ export async function login (req: CustomRequest<{ email: string, password: strin
             if (compare) {
                 const token = jwt.sign(
                     { user_id: userRow.id, email },
-                    TOKEN_KEY,
+                    TOKEN_KEY || 'BLAHBLAH',
                     { expiresIn: "999999h" }
                 );
 

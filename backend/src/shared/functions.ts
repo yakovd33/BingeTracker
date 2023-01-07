@@ -59,7 +59,7 @@ export const isEmailValid = (email : string) => {
 
 export const doesEmailExist = async (email : string) => {
     try {
-        let emailQuery = await DB.query(`SELECT * FROM users WHERE email = '${ email }'`);
+        let emailQuery = await DB.query(`SELECT * FROM users WHERE email = '${ email }'`);        
         return emailQuery.rows.length > 0;
     } catch (e) {
         console.log(e);

@@ -6,12 +6,6 @@ import fs from 'fs-extra';
 import Logger from 'jet-logger';
 import childProcess from 'child_process';
 
-// Setup logger
-const logger = new Logger();
-logger.timestamp = false;
-
-
-
 
 (async () => {
     try {
@@ -25,7 +19,7 @@ logger.timestamp = false;
         // Copy back-end files
         await exec('tsc --build tsconfig.prod.json', './')
     } catch (err) {
-        logger.err(err);
+        Logger.err(err);
     }
 })();
 
@@ -52,10 +46,10 @@ function exec(cmd: string, loc: string): Promise<void> {
     return new Promise((res, rej) => {
         return childProcess.exec(cmd, {cwd: loc}, (err, stdout, stderr) => {
             if (!!stdout) {
-                logger.info(stdout);
+                Logger.info(stdout);
             }
             if (!!stderr) {
-                logger.warn(stderr);
+                Logger.warn(stderr);
             }
             return (!!err ? rej(err) : res());
         });

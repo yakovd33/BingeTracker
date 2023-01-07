@@ -32,7 +32,7 @@ const Episode = ({ show, setShow, seasons, setSeasons, poster, title, overview }
             setSeasonIndex(parseInt(season) - 1);
 
             if (episode) {
-                ApiHelper.get(`shows/${id}/${season}/${episode}`, (episode: any) => {                
+                ApiHelper.get(`shows/${id}/${season}/${episode}`, (episode: any) => {
                     setEpisodeInfo(episode.data);
                     setWatches(episode.data.watches);
                 });
@@ -117,7 +117,7 @@ const Episode = ({ show, setShow, seasons, setSeasons, poster, title, overview }
     </div>;
 }
 
-Episode.getInitialProps = ({ query: { poster, title, overview } }: any) => {    
+Episode.getInitialProps = ({ query: { poster, title, overview } }: any) => {
     return { poster, title, overview }
 }
 

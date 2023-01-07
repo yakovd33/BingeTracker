@@ -191,8 +191,6 @@ const Movies = () => {
 
 		if (page != 1) {
 			ApiHelper.get(`movies/showcase/${ page }`, (res: any) => {
-                console.log(res);
-                
 				setMoviesList(tmpMovies.concat(res));
 			});
 		}

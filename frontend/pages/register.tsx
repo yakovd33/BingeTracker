@@ -8,11 +8,17 @@ const Register = () => {
     const [ email, setEmail ] = useState<string>();
     const [ password, setPassword ] = useState<string>();
     const [ rePass, setRePass ] = useState<string>();
+    const [ feedback, setFeedback ] = useState<string>('');
 
     const handleSubmit = (e : React.FormEvent) => {
         e.preventDefault();
 
         ApiHelper.post('users/register/', { email, password, rePass }, (res : any) => {
+            if (res?.error) {
+                setFeedback(res.error)
+            } else {
+                setFeedback('You were successfuly registered. Please log in.')
+            }
         });
     }
 
@@ -63,6 +69,8 @@ const Register = () => {
                                         onChange={ (e) => setRePass(e.target.value) }
                                     />
                                 </div>
+
+                                <div id="register-feedback">{feedback}</div>
 
                                 <div className="form-group">
                                     <button type="submit">SIGN UP</button>
