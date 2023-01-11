@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import DB from '../db';
-import { TypedRequestQueryHeadersParams } from 'src/@types/express/CustomRequest';
+import { TypedRequestQueryHeadersParams } from '../@types/express/CustomRequest';
 import { watchInterfacDay } from '../interfaces/history'
-import { getSqlDateColumnToString } from 'src/utils/database';
-import { getEpisodeByImdbId, getShowByImdbId } from 'src/utils/shows';
+import { getSqlDateColumnToString } from '../utils/database';
+import { getEpisodeByImdbId, getShowByImdbId } from '../utils/shows';
 
 export async function historyWatch(req: TypedRequestQueryHeadersParams<any, any, any, any>, res: Response) {
     let { imdbId, type } = req.params;

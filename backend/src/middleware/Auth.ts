@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 import { Request, Response, NextFunction } from 'express';
-import { TypedRequestQueryHeadersParams } from 'src/@types/express/CustomRequest';
+import { TypedRequestQueryHeadersParams } from '../@types/express/CustomRequest';
 
 const config = process.env;
 

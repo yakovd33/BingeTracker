@@ -1,10 +1,10 @@
-import { doesEmailExist, isEmailValid, getUserRowByEmail, checkPassHash } from '@shared/functions';
+import { doesEmailExist, isEmailValid, getUserRowByEmail, checkPassHash } from '../functions';
 import { Request, Response } from 'express';
 import DB from '../db';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import trakt from '../trakt';
-import { CustomRequest } from 'src/@types/express/CustomRequest';
+import { CustomRequest } from '../@types/express/CustomRequest';
 
 const saltRounds = 10;
 const { TOKEN_KEY } = process.env;

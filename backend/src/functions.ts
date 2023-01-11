@@ -1,11 +1,10 @@
-import logger from './Logger';
 import axios from 'axios';
-import DB from '../db';
+import DB from './db';
 import bcrypt from 'bcrypt';
 
 export const pErr = (err: Error) => {
     if (err) {
-        logger.err(err);
+        console.log(err);
     }
 };
 

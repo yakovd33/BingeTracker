@@ -1,9 +1,9 @@
 import {  Request, Response } from 'express';
 import trakt from '../trakt';
 import { ShowInterface } from '../interfaces/showInterface'
-import { checkConnected } from 'src/middleware/Auth';
+import { checkConnected } from '../middleware/Auth';
 import DB from '../db';
-import { getShowByImdbId } from 'src/utils/shows';
+import { getShowByImdbId } from '../utils/shows';
 
 export async function getPopularShows(req: Request, res: Response) {
 

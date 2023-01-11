@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { MovieInterface } from 'src/interfaces/movieInterface';
+import { MovieInterface } from '../interfaces/movieInterface';
 import trakt from '../trakt';
 
 
