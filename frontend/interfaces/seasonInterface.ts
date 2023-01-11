@@ -1,4 +1,4 @@
-import { IdsInterface } from "../global/interfaces";
+import { IdsInterface } from "./idsInterface";
 
 export interface SeasonInterface {
 	number: number;

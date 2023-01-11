@@ -1,7 +1,7 @@
 import axios from 'axios';
 import AuthHelper from './AuthHelper';
 
-const API_URL = 'http://localhost:4000/';
+const API_URL = process.env.API_URL;
 
 export default class ApiHelper {
     static get (url : string, callback : Function){

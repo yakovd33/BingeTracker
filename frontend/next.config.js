@@ -4,7 +4,8 @@ module.exports = {
 	images: {
         domains: ['thetvdb.com', 'place-hold.it', 'www.themoviedb.org', 'image.tmdb.org'],
     }, env: {
-        FANART_KEY: 'eee124a844b2e6598d36ce9ade9c483f',
-        TMDB_KEY: '952740bdbda47b59fafde61765f7c199'
+        FANART_KEY: process.env.FANART_KEY,
+        TMDB_KEY: process.env.TMDB_KEY,
+        API_URL: process.env.API_URL
     }
 };
